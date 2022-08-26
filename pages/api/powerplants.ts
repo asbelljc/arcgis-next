@@ -4,7 +4,7 @@ import { executeQueryJSON } from '@arcgis/core/rest/query';
 const PLANT_URL = '...';
 
 type Data = {
-  plantTypes: string[];
+  types: string[];
 };
 
 export default async function handler(
@@ -24,5 +24,5 @@ export default async function handler(
     .filter(Boolean) // this trick passes each item to the Boolean() object, coercing truthy/falsy values to true/false (thus eliminating nulls and undefineds)
     .sort();
 
-  res.status(200).json({ plantTypes: values });
+  res.status(200).json({ types: values });
 }
