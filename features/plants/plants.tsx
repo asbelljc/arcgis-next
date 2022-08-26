@@ -17,34 +17,26 @@ const fetcher = async (
 
 const Plants = () => {
   const { data, error } = useSWR('/api/powerplants', fetcher);
-
   const types = useAppSelector((state) => state.plants.types);
   const dispatch = useAppDispatch();
-
   const [isLoading, setLoading] = useState(true);
-
   const router = useRouter();
 
   useEffect(() => {
     setLoading(true);
-
     if (data) {
       dispatch(updateTypes(data.types));
       setLoading(false);
     }
   }, [data, error, dispatch]);
 
-  if (isLoading) {
+  if (isLoading)
     return (
       <div className={styles.loader}>
         <Loader />
       </div>
     );
-  }
-
-  if (!types.length) {
-    return <p>No data</p>;
-  }
+  if (!types.length) return <p>No data</p>;
 
   return (
     <ul className={styles.list}>
